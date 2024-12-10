@@ -83,17 +83,6 @@ const Tv = () => {
     }
   }, [currentChannel]);
 
-
-  const handleChannelClick = async (url) => {
-    try {
-      const proxiedUrl = `${import.meta.env.VITE_API_URL}/take?url=${encodeURIComponent(url)}`;
-      setCurrentChannel(proxiedUrl); // Устанавливаем URL для Hls.js
-    } catch (error) {
-      console.error('Error fetching channel stream:', error);
-      alert('Failed to load the channel. Please try again.');
-    }
-  };
-
   return (
     <div>
       <h1>TV Channels</h1>
@@ -102,7 +91,7 @@ const Tv = () => {
         {cashChannels.map((channel) => (
           <button
             key={channel.url}
-            onClick={() => handleChannelClick(channel.url)}
+            onClick={() => setCurrentChannel(channel.url)}
             style={{ margin: '5px' }}
           >
             {channel.name}
